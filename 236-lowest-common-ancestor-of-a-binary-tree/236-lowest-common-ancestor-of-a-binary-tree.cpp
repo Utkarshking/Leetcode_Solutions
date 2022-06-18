@@ -30,35 +30,59 @@ public:
         // approach 1 :-
         // having two arrays of using node to root path and then eventually we can 
         //  traverse
-        vector<TreeNode*>p_path;
-        vector<TreeNode*>q_path;
-        p_pathrecursion(root,p,p_path);
-        q_pathrecursion(root,q,q_path);
-        // for(auto it:p_path){
-        //     cout<<it->val<<" ";
+        // time complexity -->O(N)
+        // space complexity-->O(N+N)
+        // vector<TreeNode*>p_path;
+        // vector<TreeNode*>q_path;
+        // p_pathrecursion(root,p,p_path);
+        // q_pathrecursion(root,q,q_path);
+        // // for(auto it:p_path){
+        // //     cout<<it->val<<" ";
+        // // }
+        // // cout<<endl;
+        // // for(auto it:q_path){
+        // //     cout<<it->val<<" ";
+        // // }
+        // // cout<<endl;
+        //  TreeNode* node=new TreeNode();
+        // int size=0;
+        // if(p_path.size()==q_path.size()){
+        //     size=p_path.size();
         // }
-        // cout<<endl;
-        // for(auto it:q_path){
-        //     cout<<it->val<<" ";
+        // else if(p_path.size()>q_path.size()){
+        //     size=q_path.size();
         // }
-        // cout<<endl;
-         TreeNode* node=new TreeNode();
-        int size=0;
-        if(p_path.size()==q_path.size()){
-            size=p_path.size();
+        // else{
+        //     size=p_path.size();
+        // }
+        // cout<<p_path[0]->val;
+        // for(int i=0;i<size;i++){
+        //     if(p_path[i]->val==q_path[i]->val){
+        //       node=p_path[i];         
+        //     }
+        // }
+        // return node;
+        
+        
+        
+        
+        // Approach 2:-
+        // simple DFS traversal technique 
+        if(root==NULL or root==p or root==q){
+            return root;
         }
-        else if(p_path.size()>q_path.size()){
-            size=q_path.size();
+ TreeNode* left=lowestCommonAncestor(root->left,p,q);
+ TreeNode* right=lowestCommonAncestor(root->right,p,q);
+        if(left==NULL){
+            return right;
+        }
+        else if(right==NULL){
+            return left;
         }
         else{
-            size=p_path.size();
+            // since both the right and the left are not null
+            // so we can say that we have found our result
+            return root;
         }
-        cout<<p_path[0]->val;
-        for(int i=0;i<size;i++){
-            if(p_path[i]->val==q_path[i]->val){
-              node=p_path[i];         
-            }
-        }
-        return node;
     }
 };
