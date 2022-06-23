@@ -11,15 +11,34 @@
  */
 class Solution {
 public:
-    void recursion(TreeNode* root,int &cnt){
-        if(!root) return;
-        if(root->left) recursion(root->left,cnt);
-        cnt++;
-        if(root->right) recursion(root->right,cnt);
+    int  recursion(TreeNode* root,int cnt){
+        // inorder traversal
+        // if(!root) return;
+        // if(root->left) recursion(root->left,cnt);
+        // cnt++;
+        // if(root->right) recursion(root->right,cnt);
+        if(!root) return 0;
+        queue<TreeNode*>q;
+        q.push(root);
+        while(!q.empty()){
+            int size=q.size();
+            cnt+=size;
+            for(int i=0;i<size;i++){
+                TreeNode* current=q.front();
+                q.pop();
+                if(current->left){
+                q.push(current->left);
+                }
+                if(current->right){
+                    q.push(current->right);
+                }
+            }
+        }
+        return cnt;
     }
     int countNodes(TreeNode* root) {
         int cnt=0;
-        recursion(root,cnt);
-        return cnt;
+        int nodes=recursion(root,cnt);
+        return nodes;
     }
 };
