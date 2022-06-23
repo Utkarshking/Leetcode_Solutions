@@ -22,19 +22,21 @@ public:
         q.push(root);
         while(!q.empty()){
             int size=q.size();
-            cnt+=size;
+            // cnt+=size;
             for(int i=0;i<size;i++){
                 TreeNode* current=q.front();
                 q.pop();
                 if(current->left){
+                    cnt++;
                 q.push(current->left);
                 }
                 if(current->right){
+                    cnt++;
                     q.push(current->right);
                 }
             }
         }
-        return cnt;
+        return cnt+1;
     }
     int countNodes(TreeNode* root) {
         int cnt=0;
