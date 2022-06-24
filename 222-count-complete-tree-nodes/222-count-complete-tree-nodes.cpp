@@ -39,8 +39,29 @@ public:
         return cnt+1;
     }
     int countNodes(TreeNode* root) {
-        int cnt=0;
-        int nodes=recursion(root,cnt);
-        return nodes;
+        // int cnt=0;
+        // int nodes=recursion(root,cnt);
+        // return nodes;
+        if(!root) return 0;
+        int lh=leftheighttree(root);
+        int rh=rightheighttree(root);
+        if(lh==rh)  return (1<<lh)-1;
+        return 1+countNodes(root->left)+countNodes(root->right);
+    }
+    int leftheighttree(TreeNode* node){
+        int height=0;
+        while(node){
+            height++;
+            node=node->left;
+        }
+        return height;
+    }
+    int rightheighttree(TreeNode* node){
+        int height=0;
+        while(node){
+            height++;
+            node=node->right;
+        }
+        return height;
     }
 };
