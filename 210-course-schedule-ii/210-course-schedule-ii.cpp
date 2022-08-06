@@ -14,8 +14,10 @@ public:
                 q.push(i);
             }
         }
+        int cnttoposort=0;
         while(!q.empty()){
            ans.push_back(q.front());
+            cnttoposort++;
             int node=q.front();
             q.pop();
             for(auto it:adj[node]){
@@ -24,16 +26,7 @@ public:
                 if(indegree[it]==0) q.push(it);
                 }
             }
-        
-        
-        // not apply toposort 
-        // case of cycle maybe can be a case 
-        for(int i=0;i<numCourses;i++){
-            if(indegree[i]!=0){
-                vector<int>dummy;
-                return dummy;
-            }
-        }
+        if(cnttoposort!=numCourses) return {};
         return ans;
     }
 };
