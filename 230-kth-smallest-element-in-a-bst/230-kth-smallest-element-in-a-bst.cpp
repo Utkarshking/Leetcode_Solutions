@@ -10,17 +10,34 @@
  * };
  */
 class Solution {
+    int ans;
     void f(TreeNode* root,vector<int>&vec){
         if(root==NULL) return;
         f(root->left,vec);
         vec.push_back(root->val);
         f(root->right,vec);
     }
+    void inorder(TreeNode* root,int &cnt,int key){
+        if(root==NULL) return;
+        inorder(root->left,cnt,key);
+        cnt++;
+        if(cnt==key)   {
+            ans=root->val;
+            return;
+        }
+        inorder(root->right,cnt,key);
+    }
 public:
     int kthSmallest(TreeNode* root, int k) {
-        vector<int>vec;
-        f(root,vec);
-        cout<<vec[k-1]<<endl;
-        return vec[k-1];
+        // time complexity -->O(N)
+        // space complexity -->O(N)
+        // vector<int>vec;
+        // f(root,vec);
+        // return vec[k-1];
+        
+        // apply inorder traversal
+        int cnt=0;
+         inorder(root,cnt,k);
+        return ans;
     }
 };
